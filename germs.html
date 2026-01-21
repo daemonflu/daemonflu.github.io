@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Form with Color Preview</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="result.html" method="get">
+        <h2>Choose Your Name and Favorite Color</h2>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="color">Pick a color:</label>
+        <div class="color-picker-container">
+            <input type="color" id="color" name="color" value="#ff0000">
+            <span id="colorPreview" class="color-preview"></span>
+        </div>
+
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        const colorInput = document.getElementById('color');
+        const colorPreview = document.getElementById('colorPreview');
+
+        // Set initial preview color
+        colorPreview.style.backgroundColor = colorInput.value;
+
+        // Update preview when color changes
+        colorInput.addEventListener('input', () => {
+            colorPreview.style.backgroundColor = colorInput.value;
+        });
+    </script>
+</body>
+</html>

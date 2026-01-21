@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            position: relative;
+        }
+
+        .info-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .color-display {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-left: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .copy-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            padding: 3px 8px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-box">
+        <span id="nameDisplay"></span> 
+        <span id="colorDisplay" class="color-display"></span>
+        <button class="copy-btn" id="copyBtn">Copy</button>
+    </div>
+
+    <script>
+        // Get URL params
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name') || 'Unknown';
+        const color = params.get('color') || '#000000';
+
+        // Display name and color
+        const nameDisplay = document.getElementById('nameDisplay');
+        const colorDisplay = document.getElementById('colorDisplay');
+        nameDisplay.textContent = name;
+        colorDisplay.style.backgroundColor = color;
+        colorDisplay.title = color; // shows hex on hover
+
+        // Copy color hex code
+        const copyBtn = document.getElementById('copyBtn');
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(color).then(() => {
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => copyBtn.textContent = 'Copy', 1500);
+            });
+        });
+    </script>
+</body>
+</html>
